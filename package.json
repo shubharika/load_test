@@ -1,0 +1,23 @@
+{
+    "name": "to-do-app",
+    "version": "1.0.0",
+    "description": "Load testing",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "test_nft": "artillery run --output report.json test_load/test/artillery.yml && artillery report --output report.html report.json ",
+        "stop": "killall node"
+    },
+    "dependencies": {
+        "body-parser": "^1.18.2",
+        "express": "^4.16.3"
+    },
+    "devDependencies": {
+        "artillery": "^1.6.0-14",
+        "chai": "^4.1.2",
+        "chai-http": "^3.0.0",
+        "eslint": "^4.19.0",
+        "mocha": "^5.0.4",
+        "nyc": "^11.6.0"
+    }
+}

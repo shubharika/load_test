@@ -3,7 +3,7 @@ config:
   tls:
     rejectUnauthorized: false
   http:
-    timeout: 80
+    timeout: 120
   phases:
     - duration: 30
       arrivalRate: 5
@@ -15,15 +15,6 @@ config:
     - duration: 100
       arrivalRate: 20
       name: Sustained load
-  variables:
-    type:
-      - "recreational"
-      - "social"
-      - "diy"
-    accessibility:
-      - 0.1
-      - 0.2
-      - 0.3
   payload:
     path: "maps_data.csv"
     fields:
@@ -34,7 +25,7 @@ config:
       - "language"
 
 scenarios:
-  - name: "Add and get a place"
+  - name: "Add, get and delete a place"
     flow:
       - post:  # post an address
           url: "/maps/api/place/add/json"
@@ -51,9 +42,8 @@ scenarios:
             website: "http://google.com"
             language : "{{ language }}"
           capture:
-            json: "$.place_id"
-            as: "placeId"
-      - think: 5
+            - json: "$.place_id"
+              as: "placeId"
       - get: # fetch place id
           url: "/maps/api/place/get/json"
           params:

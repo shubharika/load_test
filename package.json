@@ -5,7 +5,8 @@
     "main": "app.js",
     "scripts": {
         "start": "node app.js",
-        "test_nft": "artillery run --output report.json test_load/test/artillery.yml && artillery report --output report.html report.json ",
+        "test_nft_2": "artillery run --output report.json test_load/test/artillery.yml && artillery report --output report.html report.json ",
+        "test_nft": "artillery run --output report.json test_load/test/google_maps.yml && artillery report --output report.html report.json",
         "stop": "killall node"
     },
     "dependencies": {

@@ -1,0 +1,39 @@
+config:
+  target: "https://www.boredapi.com/api"
+  tls:
+    rejectUnauthorized: false
+  http:
+    timeout: 80
+  phases:
+    - duration: 30
+      arrivalRate: 5
+      name: Warm up
+    - duration: 60
+      arrivalRate: 5
+      rampTo: 50
+      name: Ramp up load
+    - duration: 100
+      arrivalRate: 50
+      name: Sustained load
+  variables:
+    # type:
+    #   - "recreational"
+    #   - "social"
+    #   - "diy"
+    accessibility:
+      - 0.1
+      - 0.2
+      - 0.3
+  payload:
+    path: "keywords.csv"
+    fields:
+      - "keyword"
+
+scenarios:
+  - name: "Find activity when bored"
+    flow:
+      - get:
+          url: "/activity"
+          params:
+            type: "{{ keyword }}"
+            accessibility: "{{ accessibility }}"
